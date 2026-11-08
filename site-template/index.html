@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>UrBackup GRUB APT repository</title>
+<style>body{font-family:sans-serif;max-width:50em;margin:2em auto;padding:0 1em;line-height:1.5}pre{background:#f4f4f4;padding:1em;overflow-x:auto}</style></head>
+<body>
+<h1>UrBackup GRUB APT repository</h1>
+<p>Debian grub2 packages with a patch that lets <code>grub-probe</code>/<code>grub-install</code>
+resolve UrBackup device-mapper snapshot devices to the real root device.
+Built from <a href="https://github.com/uroni/urbackup-grub">github.com/uroni/urbackup-grub</a>.</p>
+<p>Supported: Debian 12 (bookworm) and Debian 13 (trixie), amd64.</p>
+<h2>Setup</h2>
+<pre>
+sudo curl -fsSL -o /usr/share/keyrings/urbackup-grub.gpg https://uroni.github.io/urbackup-grub/urbackup-grub.gpg
+. /etc/os-release
+sudo tee /etc/apt/sources.list.d/urbackup-grub.sources &lt;&lt;EOF
+Types: deb
+URIs: https://uroni.github.io/urbackup-grub/$VERSION_CODENAME
+Suites: $VERSION_CODENAME
+Components: main
+Signed-By: /usr/share/keyrings/urbackup-grub.gpg
+EOF
+sudo apt update &amp;&amp; sudo apt upgrade
+</pre>
+</body>
+</html>

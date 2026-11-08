@@ -1,0 +1,145 @@
+name: Build and publish APT repository
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Daily: pick up new Debian grub2 point/security releases
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Rebuild even if the version is already published
+        type: boolean
+        default: false
+
+concurrency:
+  group: apt-repo
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: debian:${{ matrix.release }}
+    strategy:
+      fail-fast: false
+      matrix:
+        release: [bookworm, trixie]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check whether a rebuild is needed
+        id: check
+        run: |
+          want=$(scripts/check-version.sh)
+          apt-get install -y -qq curl ca-certificates >/dev/null
+          have=$(curl -fsSL "https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/${{ matrix.release }}/VERSION" || true)
+          echo "wanted: $want, published: ${have:-none}"
+          if [ "$want" = "$have" ] && [ "${{ inputs.force }}" != "true" ]; then
+            echo "build=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "build=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build
+        if: steps.check.outputs.build == 'true'
+        run: scripts/build.sh "out/${{ matrix.release }}"
+
+      - uses: actions/upload-artifact@v4
+        if: steps.check.outputs.build == 'true'
+        with:
+          name: repo-${{ matrix.release }}
+          path: out/
+          retention-days: 7
+
+  publish:
+    needs: build
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        id: dl
+        continue-on-error: true
+        with:
+          pattern: repo-*
+          path: new
+          merge-multiple: true
+
+      - name: Check for new builds
+        id: any
+        run: |
+          if [ -d new ] && [ -n "$(ls -A new)" ]; then
+            echo "Releases to publish: $(ls new)"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Nothing new to publish"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Fetch current repository state
+        if: steps.any.outputs.changed == 'true'
+        run: |
+          if git ls-remote --exit-code origin gh-pages >/dev/null; then
+            git fetch --depth=1 origin gh-pages
+            git worktree add site FETCH_HEAD
+            rm -rf site/.git
+          else
+            mkdir site
+          fi
+
+      - name: Import signing key
+        if: steps.any.outputs.changed == 'true'
+        env:
+          SIGNING_KEY: ${{ secrets.REPO_SIGNING_KEY }}
+        run: |
+          echo "$SIGNING_KEY" | gpg --batch --import
+          gpg --list-secret-keys
+
+      - name: Update repository
+        if: steps.any.outputs.changed == 'true'
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq apt-utils
+          for rel in $(ls new); do
+            rm -rf "site/$rel"
+            mv "new/$rel" "site/$rel"
+            scripts/update-repo.sh site "$rel"
+          done
+          gpg --export --armor > site/urbackup-grub.asc
+          gpg --export > site/urbackup-grub.gpg
+          cp site-template/index.html site/
+          touch site/.nojekyll
+          du -sh site/*
+
+      - name: Store repository state in gh-pages branch
+        if: steps.any.outputs.changed == 'true'
+        run: |
+          cd site
+          git init -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "APT repository update ${{ github.sha }}"
+          # Single orphan commit: keep binaries out of history
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" gh-pages
+          rm -rf .git
+
+      - uses: actions/configure-pages@v5
+        if: steps.any.outputs.changed == 'true'
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.any.outputs.changed == 'true'
+        with:
+          path: site
+
+      - uses: actions/deploy-pages@v4
+        if: steps.any.outputs.changed == 'true'
+        id: deploy

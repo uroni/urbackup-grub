@@ -1,0 +1,248 @@
+diff --git a/grub-core/osdep/devmapper/getroot.c b/grub-core/osdep/devmapper/getroot.c
+index 5fb21aff9..6c4fd5995 100644
+--- a/grub-core/osdep/devmapper/getroot.c
++++ b/grub-core/osdep/devmapper/getroot.c
+@@ -125,6 +125,180 @@ get_dm_uuid (const char *os_dev)
+   return ret;
+ }
+ 
++/* Parse a "<major>:<minor>" token from STR, advancing *ENDPTR (if given)
++   past it.  Returns 0 on parse failure.  */
++static int
++parse_dm_major_minor (const char *str, const char **endptr,
++		      int *major_out, int *minor_out)
++{
++  int maj, min, len;
++
++  if (sscanf (str, "%d:%d%n", &maj, &min, &len) != 2)
++    return 0;
++  *major_out = maj;
++  *minor_out = min;
++  if (endptr)
++    *endptr = str + len;
++  return 1;
++}
++
++/* urbackup tags the dm devices it creates for live snapshots with this
++   fixed identifier in their name (e.g. "root-98d1f8b1f435"); only chase
++   through devices matching it, so ordinary dm stacks are left alone.  */
++#define URBACKUP_SNAPSHOT_TAG "98d1f8b1f435"
++
++/* Follow OS_DEV down through any chain of whole-device "snapshot-origin",
++   "era" and "linear" targets to the real underlying device and return
++   that.  Stops (and returns NULL) as soon as it reaches a device managed
++   by LVM or multipath, so ordinary logical volumes are left untouched --
++   this is only meant to see through ad-hoc dm stacks such as those used
++   by backup tools for live snapshots.  Returns NULL if OS_DEV's table
++   isn't one of these whole-device targets to begin with.  */
++char *
++grub_util_get_dm_snapshot_origin (const char *os_dev)
++{
++  struct stat st;
++  int major, minor;
++  int have_origin = 0;
++  int hops;
++
++  if (!strstr (os_dev, URBACKUP_SNAPSHOT_TAG))
++    return NULL;
++
++  if (stat (os_dev, &st) < 0)
++    return NULL;
++
++  major = major (st.st_rdev);
++  minor = minor (st.st_rdev);
++
++  /* Bound the number of hops so a pathological table can't loop forever.  */
++  for (hops = 0; hops < 32 && dm_is_dm_major (major); hops++)
++    {
++      struct dm_task *dmt;
++      void *next;
++      uint64_t start, length;
++      char *target_type, *params;
++      const char *node_uuid;
++      int nmajor, nminor;
++      int ok;
++
++      dmt = dm_task_create (DM_DEVICE_TABLE);
++      if (!dmt)
++	      break;
++      if (!dm_task_set_major_minor (dmt, major, minor, 0))
++        {
++          dm_task_destroy (dmt);
++          break;
++        }
++      dm_task_no_open_count (dmt);
++      if (!dm_task_run (dmt))
++        {
++          dm_task_destroy (dmt);
++          break;
++        }
++
++      /* Never descend into logical volumes or multipath
++	      devices; leave those to the normal LVM/mpath abstraction code.  */
++      node_uuid = dm_task_get_uuid (dmt);
++      if (node_uuid
++	        && (strncmp (node_uuid, "LVM-", 4) == 0
++	        || strncmp (node_uuid, "mpath-", 6) == 0))
++        {
++          dm_task_destroy (dmt);
++          break;
++        }
++
++      next = dm_get_next_target (dmt, NULL, &start, &length,
++				 &target_type, &params);
++
++      if (!target_type || start != 0)
++        {
++          dm_task_destroy (dmt);
++          break;
++        }
++
++      /* The table must consist of exactly this one target.  */
++      if (next && dm_get_next_target (dmt, next, &start, &length,
++				      &target_type, &params))
++        {
++          dm_task_destroy (dmt);
++          break;
++        }
++
++      dm_task_destroy (dmt);
++
++      if (strcmp (target_type, "linear") == 0
++	        || strcmp (target_type, "snapshot-origin") == 0)
++	      /* params: "<dev> [<offset>]" -- take the device.  */
++	      ok = parse_dm_major_minor (params, NULL, &nmajor, &nminor);
++      else if (strcmp (target_type, "era") == 0)
++        {
++          /* params: "<metadata-dev> <origin-dev> <block-size>" -- skip
++            the metadata device and take the origin.  */
++          const char *ptr;
++          int meta_major, meta_minor;
++
++          ok = parse_dm_major_minor (params, &ptr, &meta_major, &meta_minor);
++          if (ok)
++            {
++              while (*ptr == ' ')
++                ptr++;
++              ok = parse_dm_major_minor (ptr, NULL, &nmajor, &nminor);
++            }
++        }
++      else
++	      ok = 0;
++
++      if (!ok)
++        break;
++
++      have_origin = 1;
++      major = nmajor;
++      minor = nminor;
++    }
++
++  if (!have_origin)
++    return NULL;
++
++  if (!dm_is_dm_major (major))
++    return grub_find_device ("/dev", makedev (major, minor));
++
++  /* Still a devmapper node: resolve its
++     canonical /dev/mapper name.  Query devmapper directly rather than
++     scanning /dev by major:minor, since that can match a stale duplicate
++     device node left behind by a rename (e.g. a leftover "-clone" node).  */
++  {
++    struct dm_task *infodmt;
++    struct dm_info info;
++    const char *name;
++    char *ret;
++
++    infodmt = dm_task_create (DM_DEVICE_INFO);
++    if (!infodmt)
++      return grub_find_device ("/dev/mapper", makedev (major, minor));
++
++    if (!dm_task_set_major_minor (infodmt, major, minor, 0))
++      {
++        dm_task_destroy (infodmt);
++        return grub_find_device ("/dev/mapper", makedev (major, minor));
++      }
++    dm_task_no_open_count (infodmt);
++    if (!dm_task_run (infodmt)
++        || !dm_task_get_info (infodmt, &info)
++        || !info.exists
++        || !(name = dm_task_get_name (infodmt))
++        || !*name)
++      {
++        dm_task_destroy (infodmt);
++        return grub_find_device ("/dev/mapper", makedev (major, minor));
++      }
++
++    ret = grub_xasprintf ("/dev/mapper/%s", name);
++    dm_task_destroy (infodmt);
++    return ret;
++  }
++}
++
+ enum grub_dev_abstraction_types
+ grub_util_get_dm_abstraction (const char *os_dev)
+ {
+@@ -447,4 +621,10 @@ grub_util_get_devmapper_grub_dev (const char *os_dev __attribute__ ((unused)))
+   return NULL;
+ }
+ 
++char *
++grub_util_get_dm_snapshot_origin (const char *os_dev __attribute__ ((unused)))
++{
++  return NULL;
++}
++
+ #endif
+diff --git a/grub-core/osdep/unix/getroot.c b/grub-core/osdep/unix/getroot.c
+index 044aad36d..187a29353 100644
+--- a/grub-core/osdep/unix/getroot.c
++++ b/grub-core/osdep/unix/getroot.c
+@@ -571,13 +571,27 @@ grub_guess_root_devices (const char *dir_in)
+ 	    }
+ 	  root = (strcmp (*cur, "/dev/root") == 0);
+ 	  dm = (strncmp (*cur, "/dev/dm-", sizeof ("/dev/dm-") - 1) == 0);
+-	  if (!dm && !root)
+-	    continue;
+-	  if (stat (*cur, &st) < 0)
+-	    break;
+-	  free (*cur);
+-	  dev = st.st_rdev;
+-	  *cur = grub_find_device (dm ? "/dev/mapper" : "/dev", dev);
++	  if (dm || root)
++	    {
++	      if (stat (*cur, &st) < 0)
++		break;
++	      free (*cur);
++	      dev = st.st_rdev;
++	      *cur = grub_find_device (dm ? "/dev/mapper" : "/dev", dev);
++	    }
++
++	  /* Resolve a whole-device devmapper snapshot to its origin */
++	  if (*cur)
++	    {
++	      char *origin = grub_util_get_dm_snapshot_origin (*cur);
++	      grub_util_info ("snapshot-origin of `%s' is %s", *cur,
++			     origin ? origin : "(none)");
++	      if (origin)
++          {
++            free (*cur);
++            *cur = origin;
++          }
++	    }
+ 	}
+       if (!*cur)
+ 	return os_dev;
+diff --git a/include/grub/emu/getroot.h b/include/grub/emu/getroot.h
+index 73fa2d34a..72f369059 100644
+--- a/include/grub/emu/getroot.h
++++ b/include/grub/emu/getroot.h
+@@ -68,6 +68,8 @@ grub_util_devmapper_part_to_disk (struct stat *st,
+ 				  int *is_part, const char *os_dev);
+ char *
+ grub_util_get_devmapper_grub_dev (const char *os_dev);
++char *
++grub_util_get_dm_snapshot_origin (const char *os_dev);
+ 
+ void
+ grub_util_pull_lvm_by_command (const char *os_dev);
