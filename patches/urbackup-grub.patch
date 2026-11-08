@@ -106,8 +106,6 @@ index 5fb21aff9..6c4fd5995 100644
 +          break;
 +        }
 +
-+      dm_task_destroy (dmt);
-+
 +      if (strcmp (target_type, "linear") == 0
 +	        || strcmp (target_type, "snapshot-origin") == 0)
 +	      /* params: "<dev> [<offset>]" -- take the device.  */
@@ -129,6 +127,8 @@ index 5fb21aff9..6c4fd5995 100644
 +        }
 +      else
 +	      ok = 0;
++      /* target_type and params point into DMT; only free it now.  */
++      dm_task_destroy (dmt);
 +
 +      if (!ok)
 +        break;
