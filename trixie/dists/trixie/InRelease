@@ -1,0 +1,46 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Architectures: amd64
+Codename: trixie
+Components: main
+Date: Sun, 08 Nov 2026 21:31:31 +0000
+Description: GRUB with UrBackup snapshot patch for Debian trixie
+Label: UrBackup GRUB
+Origin: UrBackup
+Suite: trixie
+MD5Sum:
+ 693ac8e250a321d1c04fc20d04d99a37            39694 main/binary-amd64/Packages
+ c2f3b97e661a5da110bb33e9df3e5581             8579 main/binary-amd64/Packages.gz
+ 9c012b1adade1eaecfaa082ea84d5ada             7724 main/binary-amd64/Packages.xz
+ c7862bed2ac006b5bf6bed0897efc4b2            16080 main/source/Sources
+ a04a6f14d56f88bdbf1d20785127ecd5             2662 main/source/Sources.gz
+ 4c86f5d15466e0047944b5445a2feccf             2500 main/source/Sources.xz
+SHA1:
+ eecfab1814c39c7d42c22421aa5b9a195a39e8b0            39694 main/binary-amd64/Packages
+ b0b84307652e00da93b4545018b1c126aa181731             8579 main/binary-amd64/Packages.gz
+ 81453da36dd4535cdd7f39ce618b8af8270ab82d             7724 main/binary-amd64/Packages.xz
+ f484ecacc392296d3e7871e63ffdc495783a2799            16080 main/source/Sources
+ 54037229efdbe9560705c1ba236ca989064afcc1             2662 main/source/Sources.gz
+ 49baf516d8fedce7c6aaddfbb50d48b77a5bb040             2500 main/source/Sources.xz
+SHA256:
+ 0e1219deb92e8aecabba0caf263f7eedc14afeb0a6877a4943f1066e04031b95            39694 main/binary-amd64/Packages
+ 9f9fcbc9f834707a9299be992672764f9ff1c72e64f105f4c39dec1d9c3989bb             8579 main/binary-amd64/Packages.gz
+ 09922b08564df3e3089485de28c89f5974e638e705c750251b65169adab3079b             7724 main/binary-amd64/Packages.xz
+ 1be363c5e69ed52026ac10f00afc165f636657ce47b2a5de5bb98c7d71457f84            16080 main/source/Sources
+ b1875a222ffd098eeaab59bbb325b6b5ce8bd5db14564f2bc06c62d9bdb8ba18             2662 main/source/Sources.gz
+ 5aa964c273a0d7f64dc5cedd20434ecedf02697f91dc35a4a2c90a2fd74d0e88             2500 main/source/Sources.xz
+SHA512:
+ 30f71bba013a853a1854973e034fbba5dcec2568b2e824e6aa482e6ff67bbaddf464b4be72a6333815b2d7fd3bcd4f67586484398482ba108b00c367818e3b3a            39694 main/binary-amd64/Packages
+ af74d65ab4857c699599d09bffb1f6a3ce837bfd5a40e83f645e0dbde32d060561f0a0a3e0750f49a51400370c3c732e4d89059b17ae6d4a5ed9e31f56541728             8579 main/binary-amd64/Packages.gz
+ cfdd5d51413796bcc5073ada5a1ee6378c75ffaccbce8ff2813ae794f83a163d61895f1c0ac7217568e80c7d07e24261e5a2d29520af90575072fb9f57bc3507             7724 main/binary-amd64/Packages.xz
+ 299df7a8f24d2de27844c67f2cb1e63a4308821845126a1abbc37ae530f294611b8e4e7ee596caa43487423fec4a4d3e1463459c95f66145c61e7b49e166914f            16080 main/source/Sources
+ c0e0750e2dfb1eb88e92bd6145c8ff4f14f77e07609258dfef621ef8f5866de472056b8f7aa4a05e106f4c45128b7bcb3c97f99bbb2fd528d71c7e119500d051             2662 main/source/Sources.gz
+ 9554ca017dbe4a5fc4f6b457506b8c17a8e45a5d24f4f229903f9850b002709cbefc38b3fe4154894ad3e052bb755c67de1b9813bbe72469fc76831a162bdcf1             2500 main/source/Sources.xz
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYKAB0WIQSxh61bhw8c//HTpg6DzCEnfgXhWwUCavDqMwAKCRCDzCEnfgXh
+W+/mAQCmfKeTW7rabhY1ZmD8Iv4oRKR4z3dkIlGjMf6R/ZXa0QD+J0xo28JkWgAs
+JbdU8Bm8hxkHzv1K4LvEShklp7O6vwQ=
+=1Y5L
+-----END PGP SIGNATURE-----

@@ -1,0 +1,36 @@
+Architectures: amd64
+Codename: bookworm
+Components: main
+Date: Sun, 08 Nov 2026 21:31:31 +0000
+Description: GRUB with UrBackup snapshot patch for Debian bookworm
+Label: UrBackup GRUB
+Origin: UrBackup
+Suite: bookworm
+MD5Sum:
+ 8194b30881e5a10956a813660a86d38d            36072 main/binary-amd64/Packages
+ 941b1f7ddfbc5681926035f3c1956b45             8055 main/binary-amd64/Packages.gz
+ 3f320f7bf313de7f879ef5e75ce78eff             7268 main/binary-amd64/Packages.xz
+ 135eb16f267d597b5abbb6b26a2fb55a            14342 main/source/Sources
+ 6c3d3ff447c60e69a2bc90159d275525             2656 main/source/Sources.gz
+ 71dd036294fde5c09528d4576860efa7             2488 main/source/Sources.xz
+SHA1:
+ 9d0418ea42cfb2032a1a81b63fbd959d7d449e0f            36072 main/binary-amd64/Packages
+ 134ed144846866ee9a08ed28efb59c22d5bdf8a9             8055 main/binary-amd64/Packages.gz
+ f14f044675171edb55361e396e8a479644b375a7             7268 main/binary-amd64/Packages.xz
+ 5f81217e46683942dd7e38d78bb0cba6e53fc28f            14342 main/source/Sources
+ 134eba66ffdb7d473161e9ad867e8bb947098532             2656 main/source/Sources.gz
+ 5a345761cb995e6f0ad1a985e72fc468756e9051             2488 main/source/Sources.xz
+SHA256:
+ 5779b7ba6546e08f079cc2bd34aa0ed8528628362199601839df34dee9ed701c            36072 main/binary-amd64/Packages
+ 978ee4a56a603ff6b99c69ea21cc44b0496f2e7dca98aa7873b9939e78d80825             8055 main/binary-amd64/Packages.gz
+ 9623741f1a0a573f034fbc33105000714ae434fd3c15811f2108714ad96bfeef             7268 main/binary-amd64/Packages.xz
+ a87794fb4ee39b0b48b5d6c51358f963e11891ac76eec369c7f7dcb880cb0ae1            14342 main/source/Sources
+ 379043f83c30a7d5f63163c67960d93ce2f74fda63341cac2cd89dc36e4fbe65             2656 main/source/Sources.gz
+ 19066dd7ee08c6953e213342612cc750eae2cb43aee9eb8200f04a53f209f82b             2488 main/source/Sources.xz
+SHA512:
+ 7158235a5652b6694f4b379e694172b2555401c53c1572405cb9430d31c3fc43703aa594416beb8d990eab6078f1d4b0a4d7066e1f8c7c53d4035825bbb3b329            36072 main/binary-amd64/Packages
+ 8bf27de7d6b8ee485aaba902ecc4bb8d9f1abc7b11302892097a8ad58434ed2e3f48a9dcc1c14bedbfc00091757f9501ebb8a1e857ea88c3664687d707f267b9             8055 main/binary-amd64/Packages.gz
+ 16502b665e6ead13cc15248da91924163d623920b58d4a260bcccfd398990d41eb788ad2943f66746abdfed4fdc54d1b511c4652577a1a9aad08fc21667e4d53             7268 main/binary-amd64/Packages.xz
+ c376909785e745395df1950fd0e4a7dff892b616331356356a0cec442a2575741adffc4d57df0f6d45aaa14b4de8f34b6a899d602a9703cc1c71b55b6a829e51            14342 main/source/Sources
+ ae4289b3c987e736a577ddf83b5070d77ef1d51ff6fa641b39f0ac3220948ca35b69ac1e0a7f17da1e69fae37d290061ac6182332a13cb0503959441e51a6db8             2656 main/source/Sources.gz
+ ed11a3a8c98ed598f163b639872328c3d6d505128ed65fd3be43d6b26525683267ef110471e8510652a08d9e9e0cc4c3f42a4796cbd0bf5151157084756fa294             2488 main/source/Sources.xz

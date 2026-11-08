@@ -1,0 +1,710 @@
+Package: grub-common
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 17852
+Depends: libc6 (>= 2.34), libdevmapper1.02.1 (>= 2:1.02.97), libefiboot1 (>= 37), libefivar1 (>= 37), libfreetype6 (>= 2.2.1), libfuse2 (>= 2.8.4-1.4), liblzma5 (>= 5.1.1alpha+20120614), gettext-base
+Recommends: os-prober (>= 1.33)
+Suggests: multiboot-doc, grub-emu, mtools, xorriso (>= 0.5.6.pl00), desktop-base (>= 4.0.6), console-setup
+Conflicts: init-select
+Breaks: apport (<< 2.1.1), friendly-recovery (<< 0.2.13), lupin-support (<< 0.55), mdadm (<< 2.6.7-2)
+Replaces: grub-coreboot (<< 2.00-4), grub-efi (<< 1.99-1), grub-efi-amd64 (<< 2.00-4), grub-efi-ia32 (<< 2.00-4), grub-efi-ia64 (<< 2.00-4), grub-ieee1275 (<< 2.00-4), grub-linuxbios (<< 1.96+20080831-1), grub-pc (<< 2.00-4), grub-yeeloong (<< 2.00-4), init-select
+Filename: pool/main/g/grub2/grub-common_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 2724956
+MD5sum: e7117340599ce37b908b883f55db6634
+SHA1: 92f4f92ac3cc6bf527afce2da4d8a81a757dae20
+SHA256: 3e8e6dd6eb64f8071ab03cb4cb1989698cf36249d813f8c1dd3094713c0ccae8
+SHA512: fca041a82ccb455d9ad7c7b4c378d9dbe2e1bf9b6a9d0afa19a44a93c323f46daeadef105be1442f89140b13cecd03b08492254e0e286110853d48bb6614f3a9
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader (common files)
+ This package contains common files shared by the distinct flavours of GRUB.
+ It is shared between GRUB Legacy and GRUB 2, although a number of files
+ specific to GRUB 2 are here as long as they do not break GRUB Legacy.
+ .
+ grub-mkrescue needs the suggested packages mtools (for UEFI targets) and
+ xorriso.
+
+Package: grub-coreboot-bin
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 1961
+Depends: grub-common (= 2.06-13+deb12u2+urbackup2)
+Conflicts: grub-linuxbios (<< 2.06-13+deb12u2+urbackup2)
+Replaces: grub-common (<= 1.97~beta2-1), grub-coreboot (<< 1.99-1), grub-linuxbios, grub2 (<< 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-coreboot-bin_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 637776
+MD5sum: 850219ee4293f683152bcf18fc605937
+SHA1: 1a5a6803f1a0234b36c5bce4df10a3ecdb85f67b
+SHA256: 88622719b5b9bbba3efda6d98bc39bff4a3b6ac4faa2a53b793c285ea9e141ea
+SHA512: cb0ae4bb9ead92753852a89e8546c827ea4190fafccb2bdf217dd0988054633091025b4c4a7ab1975014ee3cb96d813bb95171668e9f972cf27bf9c808109931
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (Coreboot modules)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This package contains GRUB modules that have been built for use with
+ platforms running the Coreboot firmware.  It can be installed in parallel
+ with other flavours, but will not automatically install GRUB as the active
+ boot loader nor automatically update grub.cfg on upgrade unless
+ grub-coreboot is also installed.
+
+Package: grub-coreboot
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 176
+Depends: debconf (>= 0.5) | debconf-2.0, grub-common (= 2.06-13+deb12u2+urbackup2), grub2-common (= 2.06-13+deb12u2+urbackup2), grub-coreboot-bin (= 2.06-13+deb12u2+urbackup2), ucf
+Conflicts: grub (<< 0.97-54), grub-efi-amd64, grub-efi-ia32, grub-ieee1275, grub-legacy, grub-linuxbios (<< 2.06-13+deb12u2+urbackup2), grub-pc, grub-xen
+Replaces: grub-common (<= 1.97~beta2-1), grub-efi-amd64, grub-efi-ia32, grub-ieee1275, grub-legacy, grub-linuxbios, grub-pc, grub2 (<< 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-coreboot_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 45672
+MD5sum: c1010f09ae99d217a3b557fae8505c8c
+SHA1: 371b0015b5aa358f5df1ab4ed8667f65c2c9c362
+SHA256: db02fb6c94924d51345803f82e24dcee9235ba777ad07f26111f297389e4b1a6
+SHA512: 731ddb0df9da8e52fe6ba9800053e06b8a67e142615be6a374939b612e887098a98966d112eecaac926fb02cc961e69a85bb7f8670ac2cb821b25246e6348c96
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (Coreboot version)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This is a dependency package for a version of GRUB that has been built for
+ use with platforms running the Coreboot firmware.  Installing this package
+ indicates that this version of GRUB should be the active boot loader.
+
+Package: grub-efi-amd64-bin
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 18169
+Depends: grub-common (= 2.06-13+deb12u2+urbackup2)
+Recommends: grub-efi-amd64-signed, efibootmgr
+Replaces: grub-common (<= 1.97~beta2-1), grub-efi-amd64 (<< 1.99-1), grub2 (<< 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-efi-amd64-bin_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 1576492
+MD5sum: 81b928d899f85e1aa8e1b4132cd93d1c
+SHA1: ea6b332207fff556f6221ca35e61227300ff7e1f
+SHA256: 713a9421a8ce9560314b4f492876c28d1b673db4468ad74000609b0af91fc67b
+SHA512: db450ac3d99546069f8ced8571d8f103c891ac5d08dac7e51353d20bbd5a0b943b1cbb4ebf663464f96639e939b031c766bcab12736d5b67c711b608837a5969
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (EFI-AMD64 modules)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This package contains GRUB modules that have been built for use with the
+ EFI-AMD64 architecture, as used by Intel Macs (unless a BIOS interface has
+ been activated).  It can be installed in parallel with other flavours, but
+ will not automatically install GRUB as the active boot loader nor
+ automatically update grub.cfg on upgrade unless grub-efi-amd64 is also
+ installed.
+Efi-Vendor: debian
+
+Package: grub-efi-amd64-signed-template
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 219
+Filename: pool/main/g/grub2/grub-efi-amd64-signed-template_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 185064
+MD5sum: 67eb5f50df7c86e2d6b2fce1a0944675
+SHA1: 9fe87582c00f96c9fd9c5048db09cc840d5fad81
+SHA256: 8ea627fc1f1894439c6369c48355140b4163287dbf3738e4bde15ed3c02d4d66
+SHA512: 56446a3e4b3c8c8a078117d90eb4fbdbc2fb3983979bbd051d897b8c9ced75bd4566ec689fc86aa06d940d5acd631c577a44aa76e48dd8a60b7f1ad39f936b69
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (EFI-AMD64 signing template)
+ This package contains template files for grub-efi-amd64-signed.
+ This is only needed for Secure Boot signing.
+
+Package: grub-efi-amd64-signed
+Architecture: amd64
+Version: 1+2.06+13+deb12u2+urbackup2
+Built-Using: grub2 (= 2.06-13+deb12u2)
+Priority: optional
+Protected: yes
+Section: admin
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 15356
+Depends: grub-common (= 2.06-13+deb12u2+urbackup2)
+Recommends: shim-signed
+Filename: pool/main/g/grub2/grub-efi-amd64-signed_1+2.06+13+deb12u2+urbackup2_amd64.deb
+Size: 1254136
+MD5sum: 04cf1e5351eaf659ee34de8002228de4
+SHA1: 5c1c3f54d30d8ba70b6d517a259cbd64c14fe026
+SHA256: 5e743d9e2ecb9e5c7eab25c14331639951fcbac6c88638f9ffa6dcef6c173640
+SHA512: 1bce9e907bb2f1c0345787ecf1ccafc42b805e07d06c4e4e70134074bc538caf85b15a55a50009a5664a5646912df6c52ded66e3f709d0b32c6c37e2808b105c
+Description: GRand Unified Bootloader, version 2 (amd64 UEFI signed by Debian)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This package contains the binaries signed by the Debian UEFI CA to be used by
+ shim-signed.
+
+Package: grub-efi-amd64
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 176
+Depends: debconf (>= 0.5) | debconf-2.0, grub-common (= 2.06-13+deb12u2+urbackup2), grub2-common (= 2.06-13+deb12u2+urbackup2), grub-efi-amd64-bin (= 2.06-13+deb12u2+urbackup2), ucf
+Conflicts: elilo, grub, grub-coreboot, grub-efi-ia32, grub-ieee1275, grub-legacy, grub-pc, grub-xen
+Replaces: grub, grub-common (<= 1.97~beta2-1), grub-coreboot, grub-efi-ia32, grub-ieee1275, grub-legacy, grub-pc, grub2 (<< 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-efi-amd64_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 45656
+MD5sum: a1c738cb9e1afe5ae7e2f659927684a5
+SHA1: 282d33bbf4a02af54b16baee95da645a3707d59b
+SHA256: 80e597c03bf395e0362fdc7466b3f8bc192600c2664ef4ac48c112db7458876e
+SHA512: daff4b45c2d6d3e0b97eaac8c707966113a037ec095570651e8838dd54d574096e99de2248cb03d553471179a54df304a89c91e873bf6763e3b7841d34fd4df2
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (EFI-AMD64 version)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This is a dependency package for a version of GRUB that has been built for
+ use with the EFI-AMD64 architecture, as used by Intel Macs (unless a BIOS
+ interface has been activated).  Installing this package indicates that this
+ version of GRUB should be the active boot loader.
+
+Package: grub-efi-ia32-bin
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 15826
+Depends: grub-common (= 2.06-13+deb12u2+urbackup2)
+Recommends: efibootmgr
+Replaces: grub-common (<= 1.97~beta2-1), grub-efi, grub-efi-ia32 (<< 1.99-1), grub2 (<< 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-efi-ia32-bin_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 1466900
+MD5sum: 0f0e9595f0a9f161e3a6b27c3197c257
+SHA1: ee6fc1a7e7bcce866f62920e1a2ad7a6c33017f4
+SHA256: a0b60f1b8a56ed638d02b2a9f2e2c697fa14484fcbb2df71193561da2116da38
+SHA512: c5292ea39d970904a7c1abd1f2caf64628bf2039bfb0240128a54a13816704d9dd6a619679364c4e9ddfcd43a1794d243cb5d3fb7b4eea8866e721b0acfb8fac
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (EFI-IA32 modules)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This package contains GRUB modules that have been built for use with the
+ EFI-IA32 architecture, as used by Intel Macs (unless a BIOS interface has
+ been activated).  It can be installed in parallel with other flavours, but
+ will not automatically install GRUB as the active boot loader nor
+ automatically update grub.cfg on upgrade unless grub-efi-ia32 is also
+ installed.
+Efi-Vendor: debian
+
+Package: grub-efi-ia32
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 176
+Depends: debconf (>= 0.5) | debconf-2.0, grub-common (= 2.06-13+deb12u2+urbackup2), grub2-common (= 2.06-13+deb12u2+urbackup2), grub-efi-ia32-bin (= 2.06-13+deb12u2+urbackup2), ucf
+Conflicts: elilo, grub (<< 0.97-54), grub-coreboot, grub-efi-amd64, grub-ieee1275, grub-legacy, grub-pc, grub-xen
+Replaces: grub, grub-common (<= 1.97~beta2-1), grub-coreboot, grub-efi, grub-efi-amd64, grub-ieee1275, grub-legacy, grub-pc, grub2 (<< 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-efi-ia32_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 45688
+MD5sum: c47ec1ec00ec876ff94f68c022977165
+SHA1: 8bb030c985774322dbf442ff807cf944d5aa918f
+SHA256: f95869b4ce605f2f58209666498ff56f149d880785d0859857670cb0892750d5
+SHA512: e8acbda2a5e29b4b8a0633858f8d834842c8f57f9e738934983c1a3b9f937c59e19d0da4de0444da0cf57eb8cccf2d2b192759e729e04d16e371aaf6fd034a5f
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (EFI-IA32 version)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This is a dependency package for a version of GRUB that has been built for
+ use with the EFI-IA32 architecture, as used by Intel Macs (unless a BIOS
+ interface has been activated).  Installing this package indicates that this
+ version of GRUB should be the active boot loader.
+
+Package: grub-efi
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 12
+Depends: grub-common (= 2.06-13+deb12u2+urbackup2), grub-efi-amd64 (= 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-efi_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 2408
+MD5sum: b11abd3558da41f4ef0688e3a3977d71
+SHA1: f0db1c2d72fdbe985e709fdd2992bfa394d16a2f
+SHA256: 0da572f729253d60f5f4f5ae481bc92ab688b2f1b9aa4445b7b137b7f41a64a0
+SHA512: 60ae478c66adca98800bb56dfd2b6bc13d7ff014c74baae74affb79384b7e6ad36b50575f2db04e10b2ea204eb067711f57d1125f3b7a2b2af5c1a3e403912b1
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (dummy package)
+ This is a dummy package that depends on the grub-efi-$ARCH package most likely
+ to be appropriate for each architecture.
+
+Package: grub-emu
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 18874
+Depends: libc6 (>= 2.34), libdevmapper1.02.1 (>= 2:1.02.36), libgcc-s1 (>= 3.0), libsdl1.2debian (>= 1.2.15), grub-common (= 2.06-13+deb12u2+urbackup2)
+Replaces: grub-common (<= 1.97~beta3-1)
+Filename: pool/main/g/grub2/grub-emu_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 4249620
+MD5sum: 0194913119850e20dc13d4b980fadd63
+SHA1: 2fe1105d415cbac4aa03ea0e0476958756d6b25d
+SHA256: ad6980920829f00c51a54237bba70ad82ecb6791957bfcfa2c874e21882a2955
+SHA512: cd104a408c0964aa7afaef2eb0dd867a18f951b9e79fef9b27e736ccab55a55cb56cd69863b5422f84f7e923c1ed5562df157d1cb0bf074cad4e79565ef26497
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (emulated version)
+ This package contains grub-emu, an emulated version of GRUB.  It is only
+ provided for debugging purposes.
+
+Package: grub-firmware-qemu
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 2013
+Recommends: qemu-system-x86
+Enhances: qemu-system-x86
+Filename: pool/main/g/grub2/grub-firmware-qemu_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 785776
+MD5sum: b754ed046e3a7057659951afccff4c2d
+SHA1: 177235bc4bcb726783a2c13ce5e02e93dd317e36
+SHA256: 2149e6761ac821e3bd3463b5f2057c2ce3dcb9da0e42cfdffc906893d85182d5
+SHA512: eb59a66499c9c9e8df8d30d969fcbac18693f840c61c6c78304ad4232c7af2e16db90acdf52646e74be7986e573d53c4771315bb4667c699534d3b75294617f5
+Homepage: https://www.gnu.org/software/grub/
+Description: GRUB firmware image for QEMU
+ This package contains a binary of GRUB that has been built for use as
+ firmware for QEMU.  It can be used as a replacement for other PC BIOS
+ images provided by seabios, bochsbios, and so on.
+ .
+ In order to make QEMU use this firmware, simply add `-bios grub.bin' when
+ invoking it.
+ .
+ This package behaves in the same way as GRUB for coreboot, but doesn't
+ contain any code from coreboot itself, and is only suitable for QEMU. If
+ you want to install GRUB as firmware on real hardware, you need to use the
+ grub-coreboot package, and manually combine that with coreboot.
+
+Package: grub-ieee1275-bin
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 1929
+Depends: grub-common (= 2.06-13+deb12u2+urbackup2)
+Replaces: grub-common (<= 1.97~beta2-1), grub-ieee1275 (<< 1.99-1), grub2 (<< 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-ieee1275-bin_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 624456
+MD5sum: 081fac77b74b9db4223cb4165aa1d185
+SHA1: c2c5c8465ffbdcf61e56347e10ee8c870d285039
+SHA256: 72e1ebd17ff1f6a964a47e6863a8eb6269c768b44b39c4c8040414be7b2a9316
+SHA512: 61d15190bf1865ff03a3787cc3e6d9c97b053903610cf11bdece297ca11d5351e9dd60ebb3e961f18071bb27c80a7fd5bf173d5473de66bf3614ff29bc9244a6
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (Open Firmware modules)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This package contains GRUB modules that have been built for use with Open
+ Firmware implementations.  It can be installed in parallel with other
+ flavours, but will not automatically install GRUB as the active boot loader
+ nor automatically update grub.cfg on upgrade unless grub-ieee1275 is also
+ installed.
+
+Package: grub-ieee1275
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 176
+Depends: debconf (>= 0.5) | debconf-2.0, grub-common (= 2.06-13+deb12u2+urbackup2), grub2-common (= 2.06-13+deb12u2+urbackup2), grub-ieee1275-bin (= 2.06-13+deb12u2+urbackup2), ucf
+Conflicts: grub (<< 0.97-54), grub-coreboot, grub-efi-amd64, grub-efi-ia32, grub-legacy, grub-pc, grub-xen
+Replaces: grub-common (<= 1.97~beta2-1), grub-coreboot, grub-efi-amd64, grub-efi-ia32, grub-legacy, grub-pc, grub2 (<< 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-ieee1275_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 45684
+MD5sum: aff6445a92b662703415c0f95bf0ef4b
+SHA1: 090ca3125c3842f3977f8c218ac07c5e585e4eba
+SHA256: b145ed562dd9cc74c877d84f3c0b0637f43020a2babd37a4fe48c8dc9de40473
+SHA512: bd5545f2d5376650e95f7b67c21ded2e5284b06cc18f420e01533945ed11ba240ff14bb23f5d9314e7f473b0aba5bee13db750848db892379ff54cf456acfceb
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (Open Firmware version)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This is a dependency package for a version of GRUB that has been built for
+ use with Open Firmware implementations.  Installing this package indicates
+ that this version of GRUB should be the active boot loader.
+
+Package: grub-linuxbios
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: oldlibs
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 12
+Depends: grub-coreboot (= 2.06-13+deb12u2+urbackup2), grub-common (= 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-linuxbios_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 2392
+MD5sum: 59f97502c2b504044bba462c016969d3
+SHA1: 5beeeb1c34f06332d9039412181d9ae6e165bd26
+SHA256: 16680f67d2bc53e58771be90d585a5d6d76bbb1fa5482283eaedd8d06ffe44c9
+SHA512: 6607eedd53d956f271c3d2bb7157b87b505b07748f5a9d9845f66e23cc113f0cd21939dabfca7b82dbf8a000b05b45289dc98cb4221048ca533bed4555cbedc3
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (dummy package)
+ This is a dummy transitional package that depends on grub-coreboot.
+
+Package: grub-pc-bin
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 3119
+Depends: libc6 (>= 2.34), libdevmapper1.02.1 (>= 2:1.02.97), grub-common (= 2.06-13+deb12u2+urbackup2)
+Suggests: desktop-base (>= 4.0.6)
+Replaces: grub-common (<= 1.97~beta2-1), grub-pc (<< 1.99-1), grub2 (<< 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-pc-bin_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 1001468
+MD5sum: 2181d1bb51a8230a84340b30ad34eef4
+SHA1: e086e8abd9b38e398183a3084fccbfc9217e880e
+SHA256: 97ded94d3560fd739ed462193e7eeb1e04f7b2e983cdbf32be974fd297fcb87a
+SHA512: b935002c6ad9d0b38a9b4e2837f362db0444321f7bffc8986fcf69c9b0e86b7aa4b91f7155d59bc0f4a433b8ec4816ef062cf88fa36f07b4f1ae95d183c4bb5a
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (PC/BIOS modules)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+  - VESA-based graphical mode with background image support and complete 24-bit
+    color set.
+  - Support for extended charsets.  Users can write UTF-8 text to their menu
+    entries.
+ .
+ This package contains GRUB modules that have been built for use with the
+ traditional PC/BIOS architecture.  It can be installed in parallel with
+ other flavours, but will not automatically install GRUB as the active boot
+ loader nor automatically update grub.cfg on upgrade unless grub-pc is also
+ installed.
+
+Package: grub-pc
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 551
+Depends: debconf (>= 0.5) | debconf-2.0, grub-common (= 2.06-13+deb12u2+urbackup2), grub2-common (= 2.06-13+deb12u2+urbackup2), grub-pc-bin (= 2.06-13+deb12u2+urbackup2), ucf
+Conflicts: grub (<< 0.97-54), grub-coreboot, grub-efi-amd64, grub-efi-ia32, grub-ieee1275, grub-legacy, grub-xen
+Replaces: grub, grub-common (<= 1.97~beta2-1), grub-coreboot, grub-efi-amd64, grub-efi-ia32, grub-ieee1275, grub-legacy, grub2 (<< 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-pc_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 136492
+MD5sum: 8b9860066143056f538b81c490f209bc
+SHA1: 199a9522454ef558c143ddf99267dde6d9089eea
+SHA256: e02d9281c255c3f55ec8c98f24503382d9ef17cc9a5eea514704bfa8273c62e7
+SHA512: 97e4721ee9529cd77bdd8aff1cc49227f569f5bc0040908bdec9ae25498d522006c9fdbd01342c7085712f9559cdb2e0a86b5636f201305dc0eb797d8b8a3694
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (PC/BIOS version)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+  - VESA-based graphical mode with background image support and complete 24-bit
+    color set.
+  - Support for extended charsets.  Users can write UTF-8 text to their menu
+    entries.
+ .
+ This is a dependency package for a version of GRUB that has been built for
+ use with the traditional PC/BIOS architecture.  Installing this package
+ indicates that this version of GRUB should be the active boot loader.
+
+Package: grub-rescue-pc
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 6452
+Filename: pool/main/g/grub2/grub-rescue-pc_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 2498252
+MD5sum: ce91ee35e956069bd47e272306cd5cab
+SHA1: b5401919263386f87ad5bb656c35f08de04e30d3
+SHA256: 7d1749deb3694f02c119541020d242bf853dad84aef3816f2e30f9522b8d0e5f
+SHA512: 852dbacd873447a84e9de1f1a0f2c49ec95cc968790926b244fdeb5364bdf003f06bfa09dce07a457cb7cbbad79e7b03cbdc61f64b6cd6c47a2d753ce40b7a2e
+Homepage: https://www.gnu.org/software/grub/
+Description: GRUB bootable rescue images, version 2 (PC/BIOS version)
+ This package contains three GRUB rescue images that have been built for use
+ with the traditional PC/BIOS architecture:
+ .
+  - grub-rescue-floppy.img: floppy image.
+  - grub-rescue-cdrom.iso: El Torito CDROM image.
+  - grub-rescue-usb.img: USB image.
+
+Package: grub-theme-starfield
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 2782
+Depends: grub-common (= 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-theme-starfield_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 2154912
+MD5sum: 76b6730f1f94bbf1d229e80e9b1ebbec
+SHA1: 2028dd4fbc5d4b4034fd3eeed19855c754380a5b
+SHA256: 9cb232b32a041b387480efe32616f8efec1d07adbfbcaee851f1f065c447e956
+SHA512: 047b5a2b746934331bc058a2d19ea334129ff5cea299fcbfe3ef0881a9f3113ab3d47add3f12d5c6dfafa2b4e4706939b73aee74e98d463e6a5383fb7bd4c308
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (starfield theme)
+ This is the default theme for GRUB's graphical menu.
+
+Package: grub-xen-bin
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 5446
+Depends: grub-common (= 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-xen-bin_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 1017324
+MD5sum: 3c014557e6a394c244ee593f5071964c
+SHA1: 1d82fd359dfe0a0585b11b2e50b21a22ff2d841c
+SHA256: ce9dbcded4a44e886db3c21713f2c7c3878f17eae4628cf03341ed573beeb691
+SHA512: 1e904a737c797063b4678d284dfc9c7d90fd1a5fe41fb74ba06c3e9cb191e36fa9abc8db6f5a8522b9244e714443c6496726b6df9f29a3c52f104ad0c107a13b
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (Xen modules)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This package contains GRUB modules that have been built for use with the
+ Xen hypervisor (i.e. PV-GRUB).  It can be installed in parallel with other
+ flavours, but will not automatically install GRUB as the active boot loader
+ nor automatically update grub.cfg on upgrade unless grub-xen is also
+ installed.
+
+Package: grub-xen-host
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 5328
+Depends: grub-xen-bin (= 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub-xen-host_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 1181832
+MD5sum: 0f8cb77d17800162b7123086a507e542
+SHA1: ec0214b91105e2a69a2222ecf165b20fdf5aa012
+SHA256: 3288e2b4616a676e382dcc210b8ae4b0f801bde1874433d87bc8eee1a186b418
+SHA512: cd971ecf5bf8ad013c4f487be978299678cc4e2f0426b65026fb89f33fb42133e285fde5171d7abc05768b1cf2205d5387cd3714722e18653cfe694c4cb2894b
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (Xen host version)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This package arranges for GRUB binary images which can be used to boot a Xen
+ guest (i.e. PV-GRUB) to be present in the control domain filesystem.
+
+Package: grub-xen
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 176
+Depends: debconf (>= 0.5) | debconf-2.0, grub-common (= 2.06-13+deb12u2+urbackup2), grub2-common (= 2.06-13+deb12u2+urbackup2), grub-xen-bin (= 2.06-13+deb12u2+urbackup2), ucf
+Conflicts: grub (<< 0.97-54), grub-coreboot, grub-efi-amd64, grub-efi-ia32, grub-ieee1275, grub-legacy, grub-pc
+Filename: pool/main/g/grub2/grub-xen_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 45624
+MD5sum: 4e0b08b6fe87284c61270f2ac920034e
+SHA1: 6edd025d0903288fe014b61302ee4aefbc5267b0
+SHA256: 92ce8fd1d3740ab1e756f8a2ec3b9bb82ca7ad42a8eb22248befcd7d51a65736
+SHA512: a18623717bae64b2c939e7739a6581476997c5c2fc259b1f6fc9f68f117fb4ddb9089efd415eedb15538030212a1f9e0a733320677f62f2c0aad9b825a7b4175
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (Xen version)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This is a dependency package for a version of GRUB that has been built for
+ use with the Xen hypervisor (i.e. PV-GRUB).  Installing this package
+ indicates that this version of GRUB should be the active boot loader.
+
+Package: grub2-common
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: admin
+Source: grub2
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 1353
+Depends: grub-common (= 2.06-13+deb12u2+urbackup2), dpkg (>= 1.15.4), libc6 (>= 2.34), libdevmapper1.02.1 (>= 2:1.02.97), libefiboot1 (>= 37), libefivar1 (>= 37), liblzma5 (>= 5.1.1alpha+20120614)
+Conflicts: grub-legacy
+Breaks: grub (<< 0.97-54), grub-cloud-amd64 (<< 0.0.4), grub-coreboot (<< 2.02+dfsg1-7), grub-doc (<< 0.97-32), grub-efi-amd64 (<< 2.02+dfsg1-7), grub-efi-arm (<< 2.02+dfsg1-7), grub-efi-arm64 (<< 2.02+dfsg1-7), grub-efi-ia32 (<< 2.02+dfsg1-7), grub-efi-ia64 (<< 2.02+dfsg1-7), grub-ieee1275 (<< 2.02+dfsg1-7), grub-legacy-doc (<< 0.97-59), grub-pc (<< 2.02+dfsg1-7), grub-uboot (<< 2.02+dfsg1-7), grub-xen (<< 2.02+dfsg1-7), grub-yeeloong (<< 2.02+dfsg1-7), shim (<< 0.9+1474479173.6c180c6-0ubuntu1~)
+Replaces: grub, grub-cloud-amd64 (<< 0.0.4), grub-common (<< 1.99-1), grub-coreboot (<< 2.02+dfsg1-7), grub-doc (<< 0.97-32), grub-efi-amd64 (<< 2.02+dfsg1-7), grub-efi-arm (<< 2.02+dfsg1-7), grub-efi-arm64 (<< 2.02+dfsg1-7), grub-efi-ia32 (<< 2.02+dfsg1-7), grub-efi-ia64 (<< 2.02+dfsg1-7), grub-ieee1275 (<< 2.02+dfsg1-7), grub-legacy, grub-legacy-doc (<< 0.97-59), grub-pc (<< 2.02+dfsg1-7), grub-uboot (<< 2.02+dfsg1-7), grub-xen (<< 2.02+dfsg1-7), grub-yeeloong (<< 2.02+dfsg1-7)
+Filename: pool/main/g/grub2/grub2-common_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 616816
+MD5sum: 476b18cc7e72fcd627ff548ec048a125
+SHA1: cda4bff9fe3ab2f4bff8b28378727e66edbc5b58
+SHA256: 007215a39df758569ad9c87ba9784c6f0e8feaaafa8672647d0c7f41f9e37e4c
+SHA512: 1f54a4bbac180229cab1777e219c3239ed70e854a2031c394c13e22a13e9a16ef448f67a0c6591412eec576970327daa6a584685378d1559decd6e5dcae21c4e
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader (common files for version 2)
+ This package contains common files shared by the distinct flavours of GRUB.
+ The files in this package are specific to GRUB 2, and would break GRUB
+ Legacy if installed on the same system.
+
+Package: grub2
+Architecture: amd64
+Version: 2.06-13+deb12u2+urbackup2
+Multi-Arch: foreign
+Priority: optional
+Section: oldlibs
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 12
+Depends: grub-pc (= 2.06-13+deb12u2+urbackup2), grub-common (= 2.06-13+deb12u2+urbackup2)
+Filename: pool/main/g/grub2/grub2_2.06-13+deb12u2+urbackup2_amd64.deb
+Size: 2384
+MD5sum: 44b53b1bbc381ba5b6350d083d5661c7
+SHA1: c7b5bd2713491b99c0ea2c74f6b904d69662a8fc
+SHA256: 641037a9faf8bbffdd0b253f4d365468a49cdce08e1ab85389d84db522f11222
+SHA512: b77d81ec6173dc3535fee244ffc0f10c8631bb2cc2bb7ab18d8345a4444f207082de9c52e869b0b29959bc5ec7c6ceff4a2d45219ec7b663da84eb3a6028b63d
+Homepage: https://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (dummy package)
+ This is a dummy transitional package to handle GRUB 2 upgrades.  It can be
+ safely removed.
+
